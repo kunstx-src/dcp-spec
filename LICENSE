@@ -10,9 +10,9 @@ The internet has evolved through a series of foundational standards:
 
 | Protocol | What it connected |
 |----------|------------------|
-| DNS | Names to locations |
-| HTTP | Clients to resources |
-| SMTP | Mail systems |
+| DNS      | Names to locations |
+| HTTP     | Clients to resources |
+| SMTP     | Mail systems |
 
 APIs extended HTTP to connect software systems, but they are not a protocol — they are a pattern built on top of one.
 
@@ -33,15 +33,9 @@ Today, most digital interactions still depend on:
 A typical flow today looks like this:
 
 ```
-+----------+      +-------+      +---------------+      +----------+
-| Customer | ---> | Email | ---> | Support Team  | ---> | Internal |
-+----------+      +-------+      +---------------+      |  System  |
-                                                         +----------+
-                                                               |
-                                                               v
-                                                        +----------+
-                                                        | Response |
-                                                        +----------+
++----------+     +-------+     +---------------+     +----------+     +----------+
+| Customer | --> | Email | --> | Support Team  | --> |  System  | --> | Response |
++----------+     +-------+     +---------------+     +----------+     +----------+
 ```
 
 The same process repeats thousands or millions of times. Many of these interactions are predictable and structured — but the internet has no universal way to express them.
@@ -114,18 +108,18 @@ The receiving system can determine exactly:
 +------------+                        +------------+
       |                                      ^
       | 1. Discover capabilities             |
-      +------------------------------------->|
+      +------------------------------------->+
       |                                      |
       | 2. Authenticated request             |
-      +------------------------------------->|
+      +------------------------------------->+
       |                                      |
-      |<-------------------------------------+
+      +<-------------------------------------+
       | 3. Structured response
       |
       v
-+--------------------+
-|   Action / Result  |
-+--------------------+
+      +--------------------+
+      |   Action / Result  |
+      +--------------------+
 ```
 
 ---
@@ -168,16 +162,16 @@ DCP follows a layered approach and focuses only on the **communication layer**:
 ```
 +--------------------------------------------------------------+
 |                      Application Layer                       |
-|            Business Logic  •  UI  •  AI Applications        |
+|          Business Logic   •   UI   •   AI Applications       |
 +--------------------------------------------------------------+
-|                     Communication Layer                      |  <-- DCP
-|        DCP Messages  •  Requests  •  Responses  •  Discovery |
+|                     Communication Layer  (DCP)               |
+|      DCP Messages   •   Requests   •   Responses             |
 +--------------------------------------------------------------+
-|                       Identity Layer                         |
-|       Domains  •  Users  •  Agents  •  Authorization        |
+|                        Identity Layer                        |
+|       Domains   •   Users   •   Agents   •   AuthZ           |
 +--------------------------------------------------------------+
 |                       Transport Layer                        |
-|               HTTPS  •  HTTP/3  •  TCP/IP  •  DNS           |
+|          HTTPS   •   HTTP/3   •   TCP/IP   •   DNS           |
 +--------------------------------------------------------------+
 ```
 
@@ -234,26 +228,26 @@ Implementations are free to use any technology while following the protocol spec
 The web connected information. APIs connected applications. The growth of automation, distributed services, and AI agents creates the need for a common communication foundation — one designed for systems talking to systems, not humans writing to humans.
 
 ```
-+-------------+
-| Information |
-+-------------+
-       |
-       v
-+--------------+
-| Applications |
-+--------------+
-       |
-       v
-+----------+
-| Services |
-+----------+
-       |
-       v
-+--------+
-| Agents |
-+--------+
-       |
-       v
++----------------------------------+
+|           Information            |
++----------------------------------+
+                 |
+                 v
++----------------------------------+
+|           Applications           |
++----------------------------------+
+                 |
+                 v
++----------------------------------+
+|             Services             |
++----------------------------------+
+                 |
+                 v
++----------------------------------+
+|              Agents              |
++----------------------------------+
+                 |
+                 v
 +----------------------------------+
 | Trusted Autonomous Communication |
 +----------------------------------+
