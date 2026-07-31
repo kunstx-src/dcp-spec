@@ -10,10 +10,11 @@ The internet has evolved through a series of foundational standards:
 
 | Protocol | What it connected |
 |----------|------------------|
-| DNS | Names to locations |
-| HTTP | Clients to resources |
-| SMTP | Mail systems |
-| APIs | Software systems |
+| DNS      | Names to locations |
+| HTTP     | Clients to resources |
+| SMTP     | Mail systems |
+
+APIs extended HTTP to connect software systems, but they are not a protocol — they are a pattern built on top of one.
 
 Modern digital communication still lacks a universal layer designed for **direct interaction between domains, services, and intelligent systems**. DCP explores that missing layer.
 
@@ -32,7 +33,9 @@ Today, most digital interactions still depend on:
 A typical flow today looks like this:
 
 ```
-Customer → Email → Support Team → Internal System → Response
++----------+     +-------+     +---------------+     +----------+     +----------+
+| Customer | --> | Email | --> | Support Team  | --> |  System  | --> | Response |
++----------+     +-------+     +---------------+     +----------+     +----------+
 ```
 
 The same process repeats thousands or millions of times. Many of these interactions are predictable and structured — but the internet has no universal way to express them.
@@ -100,25 +103,23 @@ The receiving system can determine exactly:
 ## Communication Flow
 
 ```
-┌─────────────┐
-│   Domain A  │
-└──────┬──────┘
-       │  1. Discover capability
-       ▼
-┌─────────────┐
-│   Domain B  │
-└──────┬──────┘
-       │  2. Authenticate identity
-       ▼
-┌─────────────────────┐
-│  Exchange structured │
-│      messages        │
-└──────┬──────────────┘
-       │  3. Response or Action
-       ▼
-┌─────────────┐
-│   Result    │
-└─────────────┘
++------------+                        +------------+
+|  Domain A  |                        |  Domain B  |
++------------+                        +------------+
+      |                                      ^
+      | 1. Discover capabilities             |
+      +------------------------------------->+
+      |                                      |
+      | 2. Authenticated request             |
+      +------------------------------------->+
+      |                                      |
+      +<-------------------------------------+
+      | 3. Structured response
+      |
+      v
+      +--------------------+
+      |   Action / Result  |
+      +--------------------+
 ```
 
 ---
@@ -139,17 +140,7 @@ All communication carries clear identity, authorization, and accountability.
 
 ## Designed for the Agentic Internet
 
-The internet is moving from:
-
-```
-Humans using software
-```
-
-towards:
-
-```
-Humans directing intelligent systems
-```
+The internet is moving from humans using software towards humans directing intelligent systems.
 
 AI agents should not communicate by pretending to be humans writing messages. They require native capabilities:
 
@@ -169,21 +160,19 @@ DCP provides a foundation for this future.
 DCP follows a layered approach and focuses only on the **communication layer**:
 
 ```
-┌────────────────────────────────┐
-│        Application Layer       │
-│  Business logic · UI · AI      │
-├────────────────────────────────┤
-│       Communication Layer      │  ← DCP
-│  Messages · Requests ·         │
-│  Responses · Capabilities      │
-├────────────────────────────────┤
-│         Identity Layer         │
-│  Domains · Users · Agents ·    │
-│  Authorization                 │
-├────────────────────────────────┤
-│         Transport Layer        │
-│  Internet protocols            │
-└────────────────────────────────┘
++--------------------------------------------------------------+
+|                      Application Layer                       |
+|          Business Logic   •   UI   •   AI Applications       |
++--------------------------------------------------------------+
+|                     Communication Layer  (DCP)               |
+|      DCP Messages   •   Requests   •   Responses             |
++--------------------------------------------------------------+
+|                        Identity Layer                        |
+|       Domains   •   Users   •   Agents   •   AuthZ           |
++--------------------------------------------------------------+
+|                       Transport Layer                        |
+|          HTTPS   •   HTTP/3   •   TCP/IP   •   DNS           |
++--------------------------------------------------------------+
 ```
 
 ---
@@ -211,6 +200,8 @@ DCP follows a layered approach and focuses only on the **communication layer**:
 
 DCP defines: domain discovery, message structure, identity exchange, authentication, authorization, and request/response patterns.
 
+---
+
 ## What DCP Is Not
 
 - An application or product
@@ -225,7 +216,7 @@ Implementations are free to use any technology while following the protocol spec
 
 ## Roadmap
 
-- [x] **Phase 1 — Specification** — Define protocol structure, discovery mechanism, message format, identity model, and security model
+- [ ] **Phase 1 — Specification** — Define protocol structure, discovery mechanism, message format, identity model, and security model
 - [ ] **Phase 2 — Reference Examples** — Example domain manifests, messages, and communication scenarios
 - [ ] **Phase 3 — Reference Implementations** — Minimal implementations demonstrating discovery, communication, validation, and interoperability
 - [ ] **Phase 4 — Ecosystem Development** — Enable adoption across organizations, applications, services, and intelligent systems
@@ -237,15 +228,29 @@ Implementations are free to use any technology while following the protocol spec
 The web connected information. APIs connected applications. The growth of automation, distributed services, and AI agents creates the need for a common communication foundation — one designed for systems talking to systems, not humans writing to humans.
 
 ```
-Information
-     │
-Applications
-     │
-Services
-     │
-Agents
-     │
-Trusted Autonomous Communication
++----------------------------------+
+|           Information            |
++----------------------------------+
+                 |
+                 v
++----------------------------------+
+|           Applications           |
++----------------------------------+
+                 |
+                 v
++----------------------------------+
+|             Services             |
++----------------------------------+
+                 |
+                 v
++----------------------------------+
+|              Agents              |
++----------------------------------+
+                 |
+                 v
++----------------------------------+
+| Trusted Autonomous Communication |
++----------------------------------+
 ```
 
 ---
@@ -269,7 +274,3 @@ The foundation of the next internet should be open.
 DCP is an open research and specification project. The goal is to explore and define a possible future communication standard for the internet.
 
 > This specification is intentionally written in the style of IETF/W3C standards projects. It avoids implementation details and remains independent of current technology cycles.
-
----
-
-*DCP — Open. Structured. Trusted.*
